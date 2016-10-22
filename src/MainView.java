@@ -1,7 +1,5 @@
 import javax.swing.*;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 /**
  * Created by Manuel on 19.10.2016.
  */
@@ -16,6 +14,44 @@ public class MainView extends JFrame {
     private JTextArea moderator;
     private JLabel playerName;
     private JLabel playerLevel;
+    private JPanel quizPanel;
+    MainController controller;
 
+    public MainView (MainController controller){
+        super("Quiz-Game");
+        this.setContentPane(quizPanel);
+        this.pack();
+        this.setDefaultCloseOperation(JFrame.Exit_On_Close);
+        this.setVisible(true);
+        this.controller= controller;
+    }
 
+    public void updateQuestionsAndAnswers(){
+        playerName.setText(controller.getPlayerName());
+        playerLevel.setText(controller.getPlayerLevel());
+        String[] z = controller.getQuestionAndAnswers();
+        questionArea.setText(z[0]);
+        answerA.setText(z[1]);
+        answerB.setText(z[2]);
+        answerC.setText(z[3]);
+        answerD.setText(z[4]);
+        moderator.setText("Bitte eine Antwort auswählen!");
+    }
+
+    public void handleAnswer( String answer){
+       if( answer.equals(controller.answer(answer))){
+           updateQuestionsAndAnswers();
+       }else {
+           answerA.setEnabled(false);
+           answerB.setEnabled(false);
+           answerC.setEnabled(false);
+           answerD.setEnabled(false);
+           moderator.setText("Tut mir Leid, deine Antwort ist leider falsch.");
+           /// TODO: 20.10.2016 fertig machen.
+       }
+    }
+
+    public void play(){
+        controller.createPlayer("Ulf");
+    }
 }
