@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Manuel on 19.10.2016.
@@ -22,8 +24,46 @@ public class MainView extends JFrame {
         this.setContentPane(quizPanel);
         this.pack();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setBounds(100,100,800,700);
         this.setVisible(true);
         this.controller= controller;
+        createButtons();
+    }
+
+    /**
+     * Diese Methode dient der Zuweisung von Aktionen dzu den einzelnen Knöpfen. Ich lagere das gerne in einer extra Methode aus, um die Übersicht zu warhen.
+     */
+    private void createButtons(){
+        answerA.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleAnswer("A");
+            }
+        });
+        answerB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleAnswer("B");
+            }
+        });
+        answerC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleAnswer("C");
+            }
+        });
+        answerD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleAnswer("D");
+            }
+        });
+        play.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                play();
+            }
+        });
     }
 
     public void updateQuestionsAndAnswers(){
