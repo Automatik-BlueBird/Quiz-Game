@@ -15,20 +15,21 @@ public class MainView extends JFrame {
     private JLabel playerName;
     private JLabel playerLevel;
     private JPanel quizPanel;
-    MainController controller;
+    private MainController controller;
 
     public MainView (MainController controller){
         super("Quiz-Game");
         this.setContentPane(quizPanel);
         this.pack();
-        this.setDefaultCloseOperation(JFrame.Exit_On_Close);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.controller= controller;
     }
 
     public void updateQuestionsAndAnswers(){
         playerName.setText(controller.getPlayerName());
-        playerLevel.setText(controller.getPlayerLevel());
+        //Vorher: playerLevel.setText(controller.getPlayerLevel()); -> Man muss die Zahl erstmal in einen String konvertieren.
+        playerLevel.setText(String.valueOf(controller.getPlayerLevel()));
         String[] z = controller.getQuestionAndAnswers();
         questionArea.setText(z[0]);
         answerA.setText(z[1]);
